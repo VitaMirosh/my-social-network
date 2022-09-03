@@ -1,9 +1,13 @@
 import React from 'react';
 
-const Header = () => {
+const Nav = () => {
     return (
-    <header className='header'>
-        <img src = "https://bipbap.ru/wp-content/uploads/2017/04/priroda_kartinki_foto_03.jpg"></img>
-    </header>
+        <nav className='nav'>
+            <div><a href="">Profile</a></div>
+            <div><a href="">Messages</a></div>
+            <div><a href="">News</a></div>
+            <div><a href={""}>Music</a></div>
+            <div><a href="">Settings</a></div>
+        </nav>
     ) }
-export default Header;
+export default Nav;
