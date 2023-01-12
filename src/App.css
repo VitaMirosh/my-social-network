@@ -7,19 +7,25 @@
     grid-template-columns: 2fr 10fr;
     /*grid-gap:10px;*/
 }
-.header{
-    grid-area:h;
-background-color: purple;
+
+.header {
+    grid-area: h;
+    background-color: purple;
 }
-.header img{
-    width: 20px;
+
+.header img {
+    width: 50px;
+    margin: 10px;
 }
-.nav{
-   grid-area:n;
-    background-color: hotpink;
-}
-.content{
-    width: 1200px;
+
+
+.content {
     grid-area: c;
     background-color: burlywood;
+}
+
+
+
+.app-wrapper-content {
+    background-color: hotpink;
 }
