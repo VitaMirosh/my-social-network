@@ -1,8 +1,14 @@
 import React from "react";
 import s from './MePost.module.css';
+import { ProfilePageType} from "../../Redux/State";
 import Post1 from "./Post/Post1";
 
-const MyPost = () => {
+
+
+const MyPost = (props:ProfilePageType) => {
+
+    let postsElement = props.posts.map(p => <Post1 message={p.message} likesCount={p.likesCount}/>);
+
     return (
         <div className={s.postBlock}>
             <h3>My posts </h3>
@@ -15,8 +21,7 @@ const MyPost = () => {
 
 
             <div className={s.posts}>
-                <Post1 message='How are you?'/>
-                <Post1 message='It`s my first post'/>
+                {postsElement}
             </div>
         </div>
     )

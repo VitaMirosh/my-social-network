@@ -1,0 +1,6 @@
+.dialogsItems {
+    padding: 20px;
+}
+.dialogsItems .active {
+    color: lightpink;
+}

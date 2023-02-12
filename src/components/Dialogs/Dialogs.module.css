@@ -3,22 +3,7 @@
     grid-template-columns: 2fr 10fr;
 
 }
-
-.dialogsItems {
-padding: 20px;
-}
-.dialogsItems .active {
-    color: lightpink;
-}
-
 .dialog {
 
 }
 
-.messages {
-padding: 20px;
-}
-
-.messages massage {
-
-}
