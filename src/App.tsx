@@ -30,7 +30,7 @@ type PropsType = {
             <Nav/>
             <div className='app-wrapper-content'>
                 <Routes>
-                    <Route path={'/profile'} element={<Profile profilePage={state.profilePage} addPost={props.store.addPost.bind(props.store)} changeNewText={props.store.changeNewText.bind(props.store)}/>}/>
+                    <Route path={'/profile'} element={<Profile profilePage={state.profilePage} dispatch={props.store.dispatch.bind(props.store)}/>}/>
                     <Route path={'/dialogs*'} element={<Dialogs messagePage={state.messagePage}/>}/>
                     <Route path={'/news'} element={<News/>}/>
                     <Route path={"/music"} element={<Music/>}/>

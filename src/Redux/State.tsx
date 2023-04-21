@@ -31,12 +31,23 @@ export type StateType = {
 
 export type StoreType = {
     _state: StateType,
-    changeNewText: (newText: string) => void,
-    addPost: (postText: string) => void,
     _rerenderEntireTree: () => void,
     subscribe: (observer: () => void) => void,
-    getState: () => StateType
+    getState: () => StateType,
+    dispatch: (action: ActionType) => void
 }
+
+type AddPostActionType = {
+    type: 'ADD-POST'
+    postText:string
+
+}
+type ChangeNewTextActionType = {
+    type: 'CHANGE-NEW-TEXT'
+    newText: string
+}
+export type ActionType= AddPostActionType | ChangeNewTextActionType
+
 const store: StoreType = {
     _state: {
         profilePage: {
@@ -65,25 +76,29 @@ const store: StoreType = {
     _rerenderEntireTree() {
         console.log('state change')
     },
-    addPost() {
-        let newPost = {
-            id: 3,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0,
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = ""
-        this._rerenderEntireTree();
-    },
-    changeNewText(newText: string) {
-        this._state.profilePage.newPostText = newText;
-        this._rerenderEntireTree();
+
+    getState() {
+        return this._state;
     },
     subscribe(observer) {
         this._rerenderEntireTree = observer;
     },
-    getState() {
-        return this._state;
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 3,
+                message:action.postText,
+                likesCount: 0,
+            };
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = ""
+            this._rerenderEntireTree();
+        } else if (action.type === 'CHANGE-NEW-TEXT') {
+            this._state.profilePage.newPostText = action.newText;
+            this._rerenderEntireTree();
+        }
+
     }
 
 }

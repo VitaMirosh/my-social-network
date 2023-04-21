@@ -5,14 +5,14 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import store from "./Redux/State";
 
-let rerenderEntireTree = () => {
+let rerenderEntireTree = ( ) => {
     const root = ReactDOM.createRoot(
         document.getElementById('root') as HTMLElement
     );
     root.render(
         // <React.StrictMode>
         <HashRouter>
-            <App store={store} />
+            <App store={store}  />
         </HashRouter>
         // </React.StrictMode>
     )
