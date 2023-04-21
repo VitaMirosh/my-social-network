@@ -1,8 +1,3 @@
-let rerenderEntireTree = ()=> {
-    console.log('state change')
-}
-
-
 export type DialogsType = {
     id: number,
     name: string
@@ -24,58 +19,74 @@ export type PostsType = {
 }
 
 export type  ProfilePageType = {
-    posts: PostsType[],
+    posts: PostsType[]
     newPostText: string
 }
 
 export type StateType = {
-    profilePage: ProfilePageType,
-    messagePage: MessagePageType,
-
+    profilePage: ProfilePageType
+    messagePage: MessagePageType
 }
 
 
-let state = {
-    profilePage: {
-        newPostText: '',
-        posts: [
-            {id: 1, message: 'How are you?', likesCount: 0},
-            {id: 2, message: 'It`s my first post', likesCount: 11},
-        ]
+export type StoreType = {
+    _state: StateType,
+    changeNewText: (newText: string) => void,
+    addPost: (postText: string) => void,
+    _rerenderEntireTree: () => void,
+    subscribe: (observer: () => void) => void,
+    getState: () => StateType
+}
+const store: StoreType = {
+    _state: {
+        profilePage: {
+            newPostText: '',
+            posts: [
+                {id: 1, message: 'How are you?', likesCount: 0},
+                {id: 2, message: 'It`s my first post', likesCount: 11},
+            ]
 
+        },
+        messagePage: {
+            dialogs: [
+                {id: 1, name: 'Vita'},
+                {id: 2, name: 'Inna'},
+                {id: 3, name: 'Olha'},
+                {id: 4, name: 'Polina'},
+                {id: 5, name: 'Rosa'},
+            ],
+            messages: [
+                {id: 1, message: 'Hi'},
+                {id: 2, message: 'How are you?'},
+                {id: 3, message: "Let's go with us!"}
+            ]
+        }
     },
-    messagePage: {
-        dialogs: [
-            {id: 1, name: 'Vita'},
-            {id: 2, name: 'Inna'},
-            {id: 3, name: 'Olha'},
-            {id: 4, name: 'Polina'},
-            {id: 5, name: 'Rosa'},
-        ],
-        messages: [
-            {id: 1, message: 'Hi'},
-            {id: 2, message: 'How are you?'},
-            {id: 3, message: "Let's go with us!"}
-        ]
+    _rerenderEntireTree() {
+        console.log('state change')
+    },
+    addPost() {
+        let newPost = {
+            id: 3,
+            message: this._state.profilePage.newPostText,
+            likesCount: 0,
+        };
+        this._state.profilePage.posts.push(newPost);
+        this._state.profilePage.newPostText = ""
+        this._rerenderEntireTree();
+    },
+    changeNewText(newText: string) {
+        this._state.profilePage.newPostText = newText;
+        this._rerenderEntireTree();
+    },
+    subscribe(observer) {
+        this._rerenderEntireTree = observer;
+    },
+    getState() {
+        return this._state;
     }
-}
-export let addPost = () => {
-    let newPost = {
-        id: 3,
-        message:state.profilePage.newPostText,
-        likesCount: 0,
-    };
-    state.profilePage.posts.push(newPost);
-    state.profilePage.newPostText=""
-    //   state.profilePage.posts = [newPost, ...state.profilePage.posts]
-    rerenderEntireTree();
-}
-export const changeNewText = (newText: string) => {
-    state.profilePage.newPostText = newText;
-    rerenderEntireTree();
-}
-export const subscribe=(observer:()=>void)=>{
-    rerenderEntireTree=observer;
+
 }
 
-export default state;
+
+export default store;

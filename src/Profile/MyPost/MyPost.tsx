@@ -17,7 +17,7 @@ const MyPost = (props: MyPostType) => {
 
     let addPost = () => {
         props.addPost(props.newPostText);
-       // props.changeNewText('')
+       props.changeNewText('')
     }
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.changeNewText(e.currentTarget.value);
