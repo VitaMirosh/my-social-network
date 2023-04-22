@@ -31,7 +31,7 @@ type PropsType = {
             <div className='app-wrapper-content'>
                 <Routes>
                     <Route path={'/profile'} element={<Profile profilePage={state.profilePage} dispatch={props.store.dispatch.bind(props.store)}/>}/>
-                    <Route path={'/dialogs*'} element={<Dialogs messagePage={state.messagePage}/>}/>
+                    <Route path={'/dialogs*'} element={<Dialogs messagePage={state.messagePage} dispatch = {props.store.dispatch.bind(props.store)}/>}/>
                     <Route path={'/news'} element={<News/>}/>
                     <Route path={"/music"} element={<Music/>}/>
                     <Route path ={"/settings"} element={<Settings/>}/>

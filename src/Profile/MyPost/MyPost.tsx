@@ -1,12 +1,13 @@
 import React, {ChangeEvent} from "react";
 import s from './MePost.module.css';
-import {ActionType, PostsType} from "../../Redux/State";
+import {ActionType, addNewTextActionCreator, addPostActionCreator, PostsType} from "../../Redux/State";
 import Post1 from "./Post/Post1";
 
 type MyPostType = {
     posts: PostsType[]
     newPostText: string
     dispatch:(action:ActionType)=>void
+
 }
 
 const MyPost = (props: MyPostType) => {
@@ -15,15 +16,14 @@ const MyPost = (props: MyPostType) => {
 
 
     let addPost = () => {
-        props.dispatch({type:'ADD-POST',postText:props.newPostText})
-       props.dispatch({type:'CHANGE-NEW-TEXT',newText:' ' })
+        props.dispatch(addPostActionCreator(props.newPostText));
+       props.dispatch(addNewTextActionCreator(''))
     }
 
 
-    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type:'CHANGE-NEW-TEXT',newText:(e.currentTarget.value)})
-
-    }
+   const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(addNewTextActionCreator(e.currentTarget.value))
+   }
 
     return (
         <div className={s.postBlock}>

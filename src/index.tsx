@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
@@ -11,9 +11,9 @@ let rerenderEntireTree = ( ) => {
     );
     root.render(
         // <React.StrictMode>
-        <HashRouter>
+        <BrowserRouter>
             <App store={store}  />
-        </HashRouter>
+        </BrowserRouter>
         // </React.StrictMode>
     )
 }
