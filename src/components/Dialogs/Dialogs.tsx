@@ -2,34 +2,27 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Messages from "./Message/Message";
-import {
-    ActionType,
-    addNewDialogsPage,
-    MessagePageType,
-    sendMessage
-} from "../../Redux/State";
-
-type DialogsType = {
-    messagePage: MessagePageType,
-    dispatch: (action: ActionType) => void,
-
-}
+import {addNewDialogsPage, DialogsType, MessageType, sendMessage} from "../../reducers/dialogReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "../../APP/store";
 
 
-export const Dialogs = (props: DialogsType) => {
+export const Dialogs = () => {
+    const messages = useSelector<AppStateType, MessageType[]>(state => state.messagePage.messages)
+    const newMessageText = useSelector<AppStateType, string>(state => state.messagePage.newMessageText)
+    const dialogs = useSelector<AppStateType,DialogsType[]>(state => state.messagePage.dialogs)
+    const dispatch=useDispatch()
 
     const postText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(addNewDialogsPage(e.currentTarget.value))
+        dispatch(addNewDialogsPage(e.currentTarget.value))
     };
 
     let addText = () => {
-        props.dispatch(sendMessage(props.messagePage.newMessageText));
-        props.dispatch(addNewDialogsPage(''));
-
+        dispatch(sendMessage(newMessageText));
     }
 
-    let messageElements = props.messagePage.messages.map(m => <Messages message={m.message}/>)
-    let dialogsElements = props.messagePage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
+    let messageElements = messages.map(m => <Messages message={m.message}/>)
+    let dialogsElements = dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
 
     return (
         <div className={s.dialogs}>
@@ -39,7 +32,7 @@ export const Dialogs = (props: DialogsType) => {
             <div className={s.messages}>
                 {messageElements}
             </div>
-            <div><textarea value={props.messagePage.newMessageText}
+            <div><textarea value={newMessageText}
                            onChange={postText}
                            placeholder={'Enter your message'}></textarea></div>
             <div>
