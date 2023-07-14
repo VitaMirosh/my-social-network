@@ -1,5 +1,6 @@
 
 
+
 export type DialogsType = {
     id: number,
     name: string
@@ -10,7 +11,7 @@ export type MessageType = {
 
 
 }
-export type MessagePageType = {
+export type DialogReducerType = {
     dialogs: DialogsType[],
     messages: MessageType[],
     newMessageText: string,
@@ -31,7 +32,7 @@ export type DialogPageType =
     | ReturnType<typeof addNewDialogsPage>
     | ReturnType<typeof sendMessage>
 
-const initialState: MessagePageType = {
+export const initialState: DialogReducerType = {
     dialogs: [
         {id: 1, name: 'Vita'},
         {id: 2, name: 'Inna'},
@@ -48,20 +49,18 @@ const initialState: MessagePageType = {
 }
 
 
-export const dialogReducer = (state = initialState, action : DialogPageType) => {
-    switch(action.type) { // исправил синтаксис switch-case
+export const dialogReducer = (state = initialState, action: DialogPageType): DialogReducerType => {
+    switch (action.type) { // исправил синтаксис switch-case
         case 'ADD-NEW-DIALOGS': // исправил название экшена
             return {
                 ...state,
                 newMessageText: action.newDialog // возвращаю новый стейт с обновленным текстом
             }
         case 'SEND_MESSAGE':
-            let body = state.newMessageText; // использую текущий стейт вместо this._state
-            let newMessage = {id: 6, message: body}; // создаю новый объект сообщения
             return {
                 ...state,
-                messages: [...state.messages, newMessage], // добавляю новое сообщение в массив
-                newMessageText: '' // обнуляю текст сообщения
+                messages: [...state.messages,{id:6, message:action.sendMessageBody}],
+                newMessageText:''
             }
         default:
             return state; // возвращаю стейт по умолчанию, если нет подходящего экшена

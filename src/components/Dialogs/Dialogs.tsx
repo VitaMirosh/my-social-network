@@ -8,10 +8,10 @@ import {AppStateType} from "../../APP/store";
 
 
 export const Dialogs = () => {
-    const messages = useSelector<AppStateType, MessageType[]>(state => state.messagePage.messages)
-    const newMessageText = useSelector<AppStateType, string>(state => state.messagePage.newMessageText)
-    const dialogs = useSelector<AppStateType,DialogsType[]>(state => state.messagePage.dialogs)
-    const dispatch=useDispatch()
+    const messages = useSelector<AppStateType, MessageType[]>(state => state.dialogPage.messages)
+    const newMessageText = useSelector<AppStateType, string>(state => state.dialogPage.newMessageText)
+    const dialogs = useSelector<AppStateType, DialogsType[]>(state => state.dialogPage.dialogs)
+    const dispatch = useDispatch()
 
     const postText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         dispatch(addNewDialogsPage(e.currentTarget.value))
