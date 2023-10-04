@@ -20,6 +20,9 @@ const Nav = () => {
             <div className={`${s.item} ${s.active}`}>
                 <NavLink to="/settings" className={({ isActive }) => (isActive ? s.active: '')}>Settings</NavLink>
             </div>
+            <div className={`${s.item} ${s.active}`}>
+                <NavLink to="/users" className={({ isActive }) => (isActive ? s.active: '')}>Users</NavLink>
+            </div>
         </nav>
     ) }
 export default Nav;

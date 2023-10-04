@@ -3,10 +3,8 @@ import {followAC, setUsersAC, unFollowAC, UsersType} from "../../reducers/usersR
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../APP/store";
 import style from './users.module.css'
-import photo1 from "../../accets/image/Users/photo_2023-08-08_19-12-57.jpg";
-import photo2 from "../../accets/image/Users/photo_2023-08-08_17-13-46.jpg";
-import photo3 from "../../accets/image/Users/photo_2023-08-08_17-13-51.jpg";
-import photo4 from "../../accets/image/Users/photo_2023-08-08_17-14-00.jpg";
+import photo5 from '../../accets/image/Users/th.jpeg'
+import axios from "axios";
 
 export const Users = () => {
     const users = useSelector<AppStateType, UsersType[]>(state => state.usersPage.users)
@@ -23,51 +21,24 @@ export const Users = () => {
     const setUsers = (users: UsersType[]) => {
         dispatch(setUsersAC(users))
     }
+let getUser =()=>{
 
     if (users.length === 0) {
-        setUsers([
-            {
-                id: 1,
-                photoUrl: photo1,
-                followed: false,
-                fullName: 'Vitalia',
-                status: 'I am junior-frontend',
-                location: {city: 'Molodechno', country: 'Belarus'}
-            },
-            {
-                id: 2,
-                photoUrl: photo2,
-                followed: true,
-                fullName: 'Nikolay',
-                status: 'I am middle-frontend',
-                location: {city: 'Turly', country: 'Belarus'}
-            },
-            {
-                id: 3,
-                photoUrl: photo3,
-                followed: false,
-                fullName: 'Julia',
-                status: 'I am housewife',
-                location: {city: 'Kremenchug', country: 'Ukraine'}
-            },
-            {
-                id: 4,
-                photoUrl: photo4,
-                followed: true,
-                fullName: 'Oksana',
-                status: 'I am shop-assistant',
-                location: {city: 'Warsaw', country: 'Poland'}
-            }
-        ])
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            setUsers(response.data.items)
+        })
+}
+
     }
     return <div>
+        <button onClick={getUser}>Get Users</button>
         {
             users.map(u => {
-                console.log(u.followed)
+                // console.log(u.followed)
                 return (<div key={u.id}>
 
                <span>
-                   <div><img className={style.userPhoto} src={u.photoUrl} alt={'photo'}/></div>
+                   <div><img className={style.userPhoto} src={u.photos?.small != null ? u.photos.small : photo5} alt={'photo'}/></div>
                    <div>
                        {!u.followed ? <button onClick={() => {
                            follow(u.id)
@@ -77,12 +48,12 @@ export const Users = () => {
                        </div>
                </span>
                         <span>
-                   <div>{u.fullName}</div>
+                   <div>{u.name}</div>
                    <div>{u.status}</div>
                </span>
                         <span>
-                   <div>{u.location.country}</div>
-                    <div>{u.location.city}</div>
+                   <div>{"u.location.country"}</div>
+                    <div>{"u.location.city"}</div>
                </span>
                     </div>
                 )

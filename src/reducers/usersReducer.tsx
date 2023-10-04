@@ -1,13 +1,18 @@
 
+
 export type LocationType = {
     city: string,
     country: string
 }
+export type PhotosType = {
+    small: string,
+    large: string
+}
 export type  UsersType = {
     id: number,
-    photoUrl: string,
+    photos: PhotosType,
     followed: boolean,
-    fullName: string,
+    name: string,
     status: string,
     location: LocationType
 }
@@ -40,39 +45,40 @@ export type FollowUnFollowType =
     ReturnType<typeof setUsersAC>
 
 const initialState: UserReducerType = {
+
     users: [
-    //     {
-    //         id: 1,
-    //         photoUrl: photo1,
-    //         followed: false,
-    //         fullName: 'Vitalia',
-    //         status: 'I am junior-frontend',
-    //         location: {city: 'Molodechno', country: 'Belarus'}
-    //     },
-    //     {
-    //         id: 2,
-    //         photoUrl: photo2,
-    //         followed: true,
-    //         fullName: 'Nikolay',
-    //         status: 'I am middle-frontend',
-    //         location: {city: 'Turly', country: 'Belarus'}
-    //     },
-    //     {
-    //         id: 3,
-    //         photoUrl: photo3,
-    //         followed: false,
-    //         fullName: 'Julia',
-    //         status: 'I am housewife',
-    //         location: {city: 'Kremenchug', country: 'Ukraine'}
-    //     },
-    //     {
-    //         id: 4,
-    //         photoUrl: photo4,
-    //         followed: true,
-    //         fullName: 'Oksana',
-    //         status: 'I am shop-assistant',
-    //         location: {city: 'Warsaw', country: 'Poland'}
-    //     }
+        //     {
+        //         id: 1,
+        //         photoUrl: photo1,
+        //         followed: false,
+        //         fullName: 'Vitalia',
+        //         status: 'I am junior-frontend',
+        //         location: {city: 'Molodechno', country: 'Belarus'}
+        //     },
+        //     {
+        //         id: 2,
+        //         photoUrl: photo2,
+        //         followed: true,
+        //         fullName: 'Nikolay',
+        //         status: 'I am middle-frontend',
+        //         location: {city: 'Turly', country: 'Belarus'}
+        //     },
+        //     {
+        //         id: 3,
+        //         photoUrl: photo3,
+        //         followed: false,
+        //         fullName: 'Julia',
+        //         status: 'I am housewife',
+        //         location: {city: 'Kremenchug', country: 'Ukraine'}
+        //     },
+        //     {
+        //         id: 4,
+        //         photoUrl: photo4,
+        //         followed: true,
+        //         fullName: 'Oksana',
+        //         status: 'I am shop-assistant',
+        //         location: {city: 'Warsaw', country: 'Poland'}
+        //     }
     ]
 
 }

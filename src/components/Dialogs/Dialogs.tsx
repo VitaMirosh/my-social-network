@@ -21,7 +21,7 @@ export const Dialogs = () => {
         dispatch(sendMessage(newMessageText));
     }
 
-    let messageElements = messages.map(m => <Messages message={m.message}/>)
+    let messageElements = messages.map(m => <Messages  key={m.id} message={m.message}/>)
     let dialogsElements = dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
 
     return (
