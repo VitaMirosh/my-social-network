@@ -1,5 +1,3 @@
-
-
 export type LocationType = {
     city: string,
     country: string
@@ -15,9 +13,13 @@ export type  UsersType = {
     name: string,
     status: string,
     location: LocationType
+
 }
 export type UserReducerType = {
-    users: UsersType[]
+    users: UsersType[],
+    pageSize:number,
+    totalUsersCount:number,
+    currentPage:number
 }
 
 export const followAC = (userID: number) => {
@@ -38,14 +40,26 @@ export const setUsersAC = (users: UsersType[]) => {
         users: users
     } as const
 }
-
+export const setCurrentPageAC = (currentPage:number)=>{
+    return {
+        type:'SET_CURRENT_PAGE',
+        currentPage:currentPage
+    }as const
+}
+export const setTotalUsersCountAC = (totalUsersCount:number)=>{
+    return {
+        type:'SET_TOTAL_COUNT',
+        count:totalUsersCount
+    }as const
+}
 export type FollowUnFollowType =
     ReturnType<typeof followAC> |
     ReturnType<typeof unFollowAC> |
-    ReturnType<typeof setUsersAC>
+    ReturnType<typeof setUsersAC> |
+    ReturnType<typeof setCurrentPageAC>|
+    ReturnType<typeof setTotalUsersCountAC>
 
 const initialState: UserReducerType = {
-
     users: [
         //     {
         //         id: 1,
@@ -79,8 +93,10 @@ const initialState: UserReducerType = {
         //         status: 'I am shop-assistant',
         //         location: {city: 'Warsaw', country: 'Poland'}
         //     }
-    ]
-
+    ],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage:1
 }
 export const usersReducer = (state = initialState, action: FollowUnFollowType): UserReducerType => {
     switch (action.type) {
@@ -108,9 +124,18 @@ export const usersReducer = (state = initialState, action: FollowUnFollowType): 
             }
         case 'SET_USERS':
             return {
-                ...state,
-                users: [...state.users, ...action.users
-                ]
+                ...state, users:action.users
+
+
+            }
+        case 'SET_CURRENT_PAGE':
+            return {
+                ...state,currentPage:action.currentPage
+
+            }
+        case 'SET_TOTAL_COUNT':
+            return {
+                ...state,totalUsersCount:action.count
 
             }
 
