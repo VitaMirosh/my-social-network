@@ -14,6 +14,7 @@ export type UsersTypeProps = {
     follow: (userID: number) => void
     unFollow: (userID: number) => void
     getUser: () => void
+
 }
 export const Users = (props: UsersTypeProps) => {
 
