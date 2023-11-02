@@ -1,8 +1,9 @@
 import React from "react";
 import {UsersType}
-from "../../reducers/usersReducer";
+    from "../../reducers/usersReducer";
 import style from './users.module.css'
 import photo5 from '../../accets/image/Users/th.jpeg'
+import { NavLink} from "react-router-dom";
 
 
 export type UsersTypeProps = {
@@ -25,11 +26,14 @@ export const Users = (props: UsersTypeProps) => {
     }
     return <div>
         <div>
+
             {pages.map(p => {
                 return <span className={props.currentPage === p ? style.selectedPage : ""}
                              onClick={() => props.setCurrentPage(p)}>{p}</span>
 
             })}
+
+
         </div>
         <button onClick={props.getUser}>Get Users</button>
         {
@@ -38,8 +42,12 @@ export const Users = (props: UsersTypeProps) => {
                 return (<div key={u.id}>
 
                <span>
-                   <div><img className={style.userPhoto} src={u.photos?.small != null ? u.photos.small : photo5}
-                             alt={'photo'}/></div>
+                   <div>
+                        <NavLink to={'/profile/' + u.id}>
+                       <img className={style.userPhoto} src={u.photos?.small != null ? u.photos.small : photo5}
+                            alt={'photo'}/>
+                        </NavLink>
+                   </div>
                    <div>
                        {!u.followed ? <button onClick={() => {
                            props.follow(u.id)

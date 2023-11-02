@@ -1,13 +1,24 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
-export const ProfileInfo = () => {
+import {ProfileType} from "../../reducers/profileReducer";
+import th from '../../accets/image/Users/th.jpeg'
+
+type ProfileTypeProps = {
+    profile: ProfileType | null
+}
+export const ProfileInfo = (props: ProfileTypeProps) => {
+    // if (!props.profile?.photo) {
+    //     return <Preloader/>
+    // }
     return (
         <div className={s.content}>
-            <div >
-                <img src= 'https://static9.depositphotos.com/1000276/1100/i/450/depositphotos_11008977-stock-photo-mountain-magic-landscape.jpg' alt=''/>
+            <div>
+                <img src={props.profile?.photo ? props.profile.photo.large : th} alt={''}/>
+
             </div>
             <div className={s.descriptionBlock}>
                 ava+discription
             </div>
         </div>
-    ) }
+    )
+}

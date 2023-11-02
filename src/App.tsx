@@ -2,13 +2,13 @@ import React from 'react';
 import './App.css'
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/nav";
-import {Profile} from "./Profile/Profile";
-import {Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {UsersAPIComponent} from "./components/Users/UsersAPIComponent";
+import {Profile} from "./Profile/Profile";
 
 
 
@@ -26,6 +26,7 @@ import {UsersAPIComponent} from "./components/Users/UsersAPIComponent";
             <Nav/>
             <div className='app-wrapper-content'>
                 <Routes>
+                    <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
                     <Route path={'/profile'} element={<Profile/>}/>
                     <Route path={'/dialogs*'} element={<Dialogs/>}/>
                     <Route path={'/news'} element={<News/>}/>
