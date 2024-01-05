@@ -8,15 +8,6 @@
     /*grid-gap:10px;*/
 }
 
-.header {
-    grid-area: h;
-    background-color: purple;
-}
-
-.header img {
-    width: 50px;
-    margin: 10px;
-}
 
 
 .content {

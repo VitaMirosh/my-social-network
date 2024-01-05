@@ -2,12 +2,14 @@ import {profileReducer} from "../reducers/profileReducer";
 import {dialogReducer} from "../reducers/dialogReducer";
 import {combineReducers, createStore} from "redux";
 import {usersReducer} from "../reducers/usersReducer";
+import {authReducer} from "../reducers/auth-reducer";
 
 
 const reducers = combineReducers({
     profilePage: profileReducer,
     dialogPage: dialogReducer,
-    usersPage:usersReducer
+    usersPage:usersReducer,
+    authReducer:authReducer
 })
 
 

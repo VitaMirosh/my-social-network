@@ -8,9 +8,10 @@ import {
 } from "../../reducers/usersReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../APP/store";
-import axios from "axios";
+
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
+import axios from "axios";
 
 export const UsersAPIComponent = () => {
     const users = useSelector<AppStateType, UsersType[]>(state => state.usersPage.users)
