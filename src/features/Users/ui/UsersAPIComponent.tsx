@@ -1,9 +1,10 @@
 import React from "react";
 import {
-    followAC,
-    setCurrentPageAC, setIsFetchingAC, setIsFollowingProgressAC, setTotalUsersCountAC,
+    setCurrentPageAC,
+    setIsFetchingAC,
+    setIsFollowingProgressAC,
+    setTotalUsersCountAC,
     setUsersAC,
-    unFollowAC,
     UsersType
 } from "./usersReducer";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,7 +13,6 @@ import {AppStateType} from "../../../APP/store";
 import {Users} from "./Users";
 import {Preloader} from "../../../common/components/preloader/Preloader";
 import {usersAPI} from "../api/usersApi";
-
 
 
 export const UsersAPIComponent = () => {
@@ -24,12 +24,7 @@ export const UsersAPIComponent = () => {
     const followingInProgress = useSelector<AppStateType, boolean>(state => state.usersPage.followingInProgress)
     const dispatch = useDispatch()
 
-    const follow = (userID: number) => {
-        dispatch(followAC(userID))
-    }
-    const unFollow = (userID: number) => {
-        dispatch(unFollowAC(userID))
-    }
+
     const setUsers = (users: UsersType[]) => {
         dispatch(setUsersAC(users))
     }
@@ -72,8 +67,6 @@ export const UsersAPIComponent = () => {
                currentPage={currentPage}
                setCurrentPage={setCurrentPage}
                users={users}
-               follow={follow}
-               unFollow={unFollow}
                setIsFollowingProgress={setIsFollowingProgress}
 
 

@@ -1,10 +1,10 @@
 import React from "react";
-import {UsersType} from "./usersReducer";
+import {followAC, unFollowAC, UsersType} from "./usersReducer";
 import style from './users.module.css'
 import photo5 from '../../../accets/image/Users/th.jpeg'
 import {NavLink} from "react-router-dom";
-import axios from "axios";
 import {usersAPI} from "../api/usersApi";
+import {useDispatch} from "react-redux";
 
 
 export type UsersTypeProps = {
@@ -13,12 +13,10 @@ export type UsersTypeProps = {
     currentPage: number
     setCurrentPage: (currentPage: number) => void
     users: UsersType[]
-    follow: (userID: number) => void
-    unFollow: (userID: number) => void
     setIsFollowingProgress:(followingInProgress:boolean)=>void
 }
 export const Users = (props: UsersTypeProps) => {
-
+    const dispatch = useDispatch()
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -53,7 +51,7 @@ export const Users = (props: UsersTypeProps) => {
                            usersAPI.unFollow(u.id)
                                .then(data => {
                                    if (data.resultCode == 0) {
-                                       props.unFollow(u.id)
+                                       dispatch(unFollowAC(u.id))
                                    }
                                });
 
@@ -61,7 +59,7 @@ export const Users = (props: UsersTypeProps) => {
                            usersAPI.follow(u.id)
                                .then(data => {
                                    if (data.resultCode == 0) {
-                                       props.follow(u.id)
+                                       dispatch(followAC(u.id))
                                    }
                                });
 
