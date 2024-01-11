@@ -39,7 +39,10 @@ export const UsersAPIComponent = () => {
     const setCurrentPage = (currentPage: number) => {
         dispatch(setCurrentPageAC(currentPage))
         toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`,{
+            withCredentials:true
+        })
+            .then(response => {
             toggleIsFetching(false)
             setUsers(response.data.items)
         })
@@ -48,7 +51,10 @@ export const UsersAPIComponent = () => {
     let getUser = () => {
         if (users.length === 0) {
             toggleIsFetching(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`).then(response => {
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`,{
+                withCredentials:true
+            })
+                .then(response => {
                 toggleIsFetching(false)
                 setUsers(response.data.items)
                 setTotalUsersCount(response.data.totalCount)
