@@ -1,4 +1,4 @@
-import {PhotosType} from "../../../reducers/usersReducer";
+import {PhotosType} from "../../Users/ui/usersReducer";
 
 type ContactType = {
     github: string,

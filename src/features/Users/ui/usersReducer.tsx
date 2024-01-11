@@ -17,10 +17,11 @@ export type  UsersType = {
 }
 export type UserReducerType = {
     users: UsersType[],
-    pageSize:number,
-    totalUsersCount:number,
-    currentPage:number,
-    isFetching:boolean
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage: number,
+    isFetching: boolean,
+    followingInProgress: boolean
 }
 
 export const followAC = (userID: number) => {
@@ -41,22 +42,28 @@ export const setUsersAC = (users: UsersType[]) => {
         users: users
     } as const
 }
-export const setCurrentPageAC = (currentPage:number)=>{
+export const setCurrentPageAC = (currentPage: number) => {
     return {
-        type:'SET_CURRENT_PAGE',
-        currentPage:currentPage
-    }as const
+        type: 'SET_CURRENT_PAGE',
+        currentPage: currentPage
+    } as const
 }
-export const setTotalUsersCountAC = (totalUsersCount:number)=>{
+export const setTotalUsersCountAC = (totalUsersCount: number) => {
     return {
-        type:'SET_TOTAL_COUNT',
-        count:totalUsersCount
-    }as const
+        type: 'SET_TOTAL_COUNT',
+        count: totalUsersCount
+    } as const
 }
-export const setIsFetchingAC = (isFetching:boolean)=>{
+export const setIsFetchingAC = (isFetching: boolean) => {
     return {
-        type:'SET_IS_FETCHING',
-        isFetching:isFetching
+        type: 'SET_IS_FETCHING',
+        isFetching: isFetching
+    } as const
+}
+export const setIsFollowingProgressAC = (followingInProgress: boolean) => {
+    return {
+        type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+        followingInProgress: followingInProgress
     }as const
 }
 
@@ -64,9 +71,10 @@ export type FollowUnFollowType =
     ReturnType<typeof followAC> |
     ReturnType<typeof unFollowAC> |
     ReturnType<typeof setUsersAC> |
-    ReturnType<typeof setCurrentPageAC>|
-    ReturnType<typeof setTotalUsersCountAC>|
-    ReturnType<typeof setIsFetchingAC>
+    ReturnType<typeof setCurrentPageAC> |
+    ReturnType<typeof setTotalUsersCountAC> |
+    ReturnType<typeof setIsFetchingAC>|
+    ReturnType<typeof setIsFollowingProgressAC>
 
 const initialState: UserReducerType = {
     users: [
@@ -105,8 +113,9 @@ const initialState: UserReducerType = {
     ],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage:1,
-    isFetching:false
+    currentPage: 1,
+    isFetching: false,
+    followingInProgress: false
 }
 export const usersReducer = (state = initialState, action: FollowUnFollowType): UserReducerType => {
     switch (action.type) {
@@ -153,6 +162,10 @@ export const usersReducer = (state = initialState, action: FollowUnFollowType): 
             return {
                 ...state, isFetching: action.isFetching
 
+            }
+        case 'TOGGLE_IS_FOLLOWING_PROGRESS':
+            return {
+                ...state,followingInProgress:action.followingInProgress
             }
 
         default:

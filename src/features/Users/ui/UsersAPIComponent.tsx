@@ -1,17 +1,18 @@
 import React from "react";
 import {
     followAC,
-    setCurrentPageAC, setIsFetchingAC, setTotalUsersCountAC,
+    setCurrentPageAC, setIsFetchingAC, setIsFollowingProgressAC, setTotalUsersCountAC,
     setUsersAC,
     unFollowAC,
     UsersType
-} from "../../../reducers/usersReducer";
+} from "./usersReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../APP/store";
 
 import {Users} from "./Users";
 import {Preloader} from "../../../common/components/preloader/Preloader";
-import {userAPI} from "../../../API/api";
+import {usersAPI} from "../api/usersApi";
+
 
 
 export const UsersAPIComponent = () => {
@@ -20,6 +21,7 @@ export const UsersAPIComponent = () => {
     const totalUsersCount = useSelector<AppStateType, number>(state => state.usersPage.totalUsersCount)
     const currentPage = useSelector<AppStateType, number>(state => state.usersPage.currentPage)
     const isFetching = useSelector<AppStateType, boolean>(state => state.usersPage.isFetching)
+    const followingInProgress = useSelector<AppStateType, boolean>(state => state.usersPage.followingInProgress)
     const dispatch = useDispatch()
 
     const follow = (userID: number) => {
@@ -37,10 +39,14 @@ export const UsersAPIComponent = () => {
     const setTotalUsersCount = (totalUsersCount: number) => {
         dispatch(setTotalUsersCountAC(40))//totalUsersCount
     }
+    const setIsFollowingProgress=(followingInProgress:boolean)=>{
+        dispatch(setIsFollowingProgressAC(followingInProgress))
+    }
+
     const setCurrentPage = (currentPage: number) => {
         dispatch(setCurrentPageAC(currentPage))
         toggleIsFetching(true)
-        userAPI.getUsers(currentPage,pageSize)
+        usersAPI.getUsers(currentPage,pageSize)
             .then(data => {
                 toggleIsFetching(false)
                 setUsers(data.items)
@@ -49,7 +55,7 @@ export const UsersAPIComponent = () => {
 
     if (users.length === 0) {
         toggleIsFetching(true)
-        userAPI.getUsers(currentPage,pageSize)
+        usersAPI.getUsers(currentPage,pageSize)
             .then(data => {
             toggleIsFetching(false)
             setUsers(data.items)
@@ -68,6 +74,7 @@ export const UsersAPIComponent = () => {
                users={users}
                follow={follow}
                unFollow={unFollow}
+               setIsFollowingProgress={setIsFollowingProgress}
 
 
         />
