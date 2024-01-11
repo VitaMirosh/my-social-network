@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css'
-import Nav from "./components/Nav/nav";
+import Nav from "./common/components/Nav/nav";
 import {Navigate, Route, Routes} from 'react-router-dom';
-import News from "./components/News/News";
-import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
-import {Dialogs} from "./components/Dialogs/Dialogs";
-import {UsersAPIComponent} from "./components/Users/UsersAPIComponent";
-import {Profile} from "./Profile/Profile";
-import Header from "./components/Header/Header";
-import {Auth} from "./features/auth/ui/Auth";
+import News from "./common/components/News/News";
+import Music from "./common/components/Music/Music";
+import Settings from "./common/components/Settings/Settings";
+import {Dialogs} from "./common/components/Dialogs/Dialogs";
+import {UsersAPIComponent} from "./features/Users/ui/UsersAPIComponent";
+import {Profile} from "./features/2-Profile/ui/Profile";
+import Header from "./common/components/Header/Header";
+import {Auth} from "./features/1-auth/ui/Auth";
 
 
 // type AppType={

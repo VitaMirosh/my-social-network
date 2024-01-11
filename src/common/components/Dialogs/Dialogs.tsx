@@ -2,9 +2,9 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Messages from "./Message/Message";
-import {addNewDialogsPage, DialogsType, MessageType, sendMessage} from "../../reducers/dialogReducer";
+import {addNewDialogsPage, DialogsType, MessageType, sendMessage} from "../../../reducers/dialogReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../APP/store";
+import {AppStateType} from "../../../APP/store";
 
 
 export const Dialogs = () => {

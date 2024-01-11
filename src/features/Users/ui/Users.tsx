@@ -1,8 +1,8 @@
 import React from "react";
 import {UsersType}
-    from "../../reducers/usersReducer";
+    from "../../../reducers/usersReducer";
 import style from './users.module.css'
-import photo5 from '../../accets/image/Users/th.jpeg'
+import photo5 from '../../../accets/image/Users/th.jpeg'
 import { NavLink} from "react-router-dom";
 import axios from "axios";
 
@@ -15,7 +15,6 @@ export type UsersTypeProps = {
     users: UsersType[]
     follow: (userID: number) => void
     unFollow: (userID: number) => void
-    getUser: () => void
 
 }
 export const Users = (props: UsersTypeProps) => {
@@ -36,7 +35,7 @@ export const Users = (props: UsersTypeProps) => {
 
 
         </div>
-        <button onClick={props.getUser}>Get Users</button>
+
         {
             props.users.map(u => {
                 // console.log(u.followed)

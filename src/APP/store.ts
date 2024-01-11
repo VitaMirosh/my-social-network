@@ -1,4 +1,4 @@
-import {profileReducer} from "../reducers/profileReducer";
+import {profileReducer} from "../features/2-Profile/model/profileReducer";
 import {dialogReducer} from "../reducers/dialogReducer";
 import {combineReducers, createStore} from "redux";
 import {usersReducer} from "../reducers/usersReducer";

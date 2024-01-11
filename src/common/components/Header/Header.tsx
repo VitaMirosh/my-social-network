@@ -1,9 +1,9 @@
 import React from 'react';
 import s from './header.module.css'
-import {SetReducerType} from "../../reducers/auth-reducer";
+import {SetReducerType} from "../../../reducers/auth-reducer";
 import {useSelector} from "react-redux";
-import {AppStateType} from "../../APP/store";
-import {Auth} from "../../features/auth/ui/Auth";
+import {AppStateType} from "../../../APP/store";
+import {Auth} from "../../../features/1-auth/ui/Auth";
 
 
 

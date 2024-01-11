@@ -1,9 +1,9 @@
 import React, {ChangeEvent} from "react";
 import s from './MePost.module.css';
 import Post1 from "./Post/Post1";
-import {addNewTextActionCreator, addPostActionCreator, PostsType} from "../../reducers/profileReducer";
+import {addNewTextActionCreator, addPostActionCreator, PostsType} from "../../model/profileReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../APP/store";
+import {AppStateType} from "../../../../APP/store";
 
 
 const MyPost = () => {

@@ -4,8 +4,8 @@ import s from './Profile.module.css'
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../APP/store";
-import {ProfileType, setUsersProfileAC} from "../reducers/profileReducer";
+import {AppStateType} from "../../../APP/store";
+import {ProfileType, setUsersProfileAC} from "../model/profileReducer";
 
 
 

@@ -5,13 +5,14 @@ import {
     setUsersAC,
     unFollowAC,
     UsersType
-} from "../../reducers/usersReducer";
+} from "../../../reducers/usersReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../APP/store";
+import {AppStateType} from "../../../APP/store";
 
 import {Users} from "./Users";
-import {Preloader} from "../common/preloader/Preloader";
-import axios from "axios";
+import {Preloader} from "../../../common/components/preloader/Preloader";
+import {userAPI} from "../../../API/api";
+
 
 export const UsersAPIComponent = () => {
     const users = useSelector<AppStateType, UsersType[]>(state => state.usersPage.users)
@@ -39,30 +40,26 @@ export const UsersAPIComponent = () => {
     const setCurrentPage = (currentPage: number) => {
         dispatch(setCurrentPageAC(currentPage))
         toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`,{
-            withCredentials:true
-        })
-            .then(response => {
+        userAPI.getUsers(currentPage,pageSize)
+            .then(data => {
+                toggleIsFetching(false)
+                setUsers(data.items)
+            })
+    }
+
+    if (users.length === 0) {
+        toggleIsFetching(true)
+        userAPI.getUsers(currentPage,pageSize)
+            .then(data => {
             toggleIsFetching(false)
-            setUsers(response.data.items)
+            setUsers(data.items)
+            setTotalUsersCount(data.totalCount)
         })
     }
 
-    let getUser = () => {
-        if (users.length === 0) {
-            toggleIsFetching(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`,{
-                withCredentials:true
-            })
-                .then(response => {
-                toggleIsFetching(false)
-                setUsers(response.data.items)
-                setTotalUsersCount(response.data.totalCount)
-            })
-        }
-    }
 
     return <>
+
         {isFetching ? <Preloader/> : null}
         <Users totalUsersCount={totalUsersCount}
                pageSize={pageSize}
@@ -71,7 +68,6 @@ export const UsersAPIComponent = () => {
                users={users}
                follow={follow}
                unFollow={unFollow}
-               getUser={getUser}
 
 
         />

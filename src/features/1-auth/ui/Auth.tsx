@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../APP/store";
 import {SetReducerType, SetUsersAC} from "../../../reducers/auth-reducer";
-import s from "../../../components/Header/header.module.css";
+import s from "../../../common/components/Header/header.module.css";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
 
