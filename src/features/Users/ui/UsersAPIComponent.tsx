@@ -2,7 +2,6 @@ import React from "react";
 import {
     setCurrentPageAC,
     setIsFetchingAC,
-    setIsFollowingProgressAC,
     setTotalUsersCountAC,
     setUsersAC,
     UsersType
@@ -21,7 +20,7 @@ export const UsersAPIComponent = () => {
     const totalUsersCount = useSelector<AppStateType, number>(state => state.usersPage.totalUsersCount)
     const currentPage = useSelector<AppStateType, number>(state => state.usersPage.currentPage)
     const isFetching = useSelector<AppStateType, boolean>(state => state.usersPage.isFetching)
-    const followingInProgress = useSelector<AppStateType, boolean>(state => state.usersPage.followingInProgress)
+
     const dispatch = useDispatch()
 
 
@@ -34,9 +33,7 @@ export const UsersAPIComponent = () => {
     const setTotalUsersCount = (totalUsersCount: number) => {
         dispatch(setTotalUsersCountAC(40))//totalUsersCount
     }
-    const setIsFollowingProgress=(followingInProgress:boolean)=>{
-        dispatch(setIsFollowingProgressAC(followingInProgress))
-    }
+
 
     const setCurrentPage = (currentPage: number) => {
         dispatch(setCurrentPageAC(currentPage))
@@ -67,9 +64,6 @@ export const UsersAPIComponent = () => {
                currentPage={currentPage}
                setCurrentPage={setCurrentPage}
                users={users}
-               setIsFollowingProgress={setIsFollowingProgress}
-
-
         />
     </>
 }

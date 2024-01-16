@@ -15,13 +15,15 @@ export type  UsersType = {
     location: LocationType
 
 }
+
+
 export type UserReducerType = {
     users: UsersType[],
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
     isFetching: boolean,
-    followingInProgress: boolean
+    followingInProgress: number[]
 }
 
 export const followAC = (userID: number) => {
@@ -60,11 +62,13 @@ export const setIsFetchingAC = (isFetching: boolean) => {
         isFetching: isFetching
     } as const
 }
-export const setIsFollowingProgressAC = (followingInProgress: boolean) => {
+export const setIsFollowingProgressAC = (followingInProgress: number[], userId: number,isFetching: boolean) => {
     return {
         type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
-        followingInProgress: followingInProgress
-    }as const
+        followingInProgress: followingInProgress,
+        userId: userId,
+        isFetching: isFetching
+    } as const
 }
 
 export type FollowUnFollowType =
@@ -73,7 +77,7 @@ export type FollowUnFollowType =
     ReturnType<typeof setUsersAC> |
     ReturnType<typeof setCurrentPageAC> |
     ReturnType<typeof setTotalUsersCountAC> |
-    ReturnType<typeof setIsFetchingAC>|
+    ReturnType<typeof setIsFetchingAC> |
     ReturnType<typeof setIsFollowingProgressAC>
 
 const initialState: UserReducerType = {
@@ -114,8 +118,8 @@ const initialState: UserReducerType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false,
-    followingInProgress: false
+    isFetching: true,
+    followingInProgress: []
 }
 export const usersReducer = (state = initialState, action: FollowUnFollowType): UserReducerType => {
     switch (action.type) {
@@ -165,7 +169,9 @@ export const usersReducer = (state = initialState, action: FollowUnFollowType): 
             }
         case 'TOGGLE_IS_FOLLOWING_PROGRESS':
             return {
-                ...state,followingInProgress:action.followingInProgress
+                ...state, followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
             }
 
         default:
@@ -173,3 +179,7 @@ export const usersReducer = (state = initialState, action: FollowUnFollowType): 
     }
 
 }
+// ...state,
+// followingInProgress: action.followingInProgress
+//     ? [...state.followingInProgress, action.userId] :
+//     [state.followingInProgress.filter(id => id != action.userId)]
